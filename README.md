@@ -1,7 +1,7 @@
 **Demo Application to test DB credentials reload on the fly**
 
-CREATE DATABASE db_2;
-CREATE USER 'springuser'@'localhost' IDENTIFIED BY 'ThePassword';
-GRANT ALL PRIVILEGES ON *.* TO 'springuser'@'localhost' WITH GRANT OPTION;
 
-ALTER USER 'springuser'@'localhost' IDENTIFIED BY 'NewThePassword';
+Documenation to follow....
+
+
+
