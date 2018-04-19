@@ -38,23 +38,28 @@ management:
 $ curl -X PUT -d name=Ani -d email="ani@ani.io" http://localhost:8080/demo/add
 $ curl -X PUT -d name=Jack -d email="jack@test.io" http://localhost:8080/demo/add
 ```
+
 1. Now verify the above records by doing a _GET_
 ```bash
 $ curl http://localhost:8080/demo/all
 ```
+
 1. Now change your DB credentials in mysql after logging into your `mysqladmin`
 ```bash
 $ ALTER USER 'springuser'@'localhost' IDENTIFIED BY 'NewThePassword';
 ```
+
 1. After changing the password successfully, go ahead and update your `db-reload.yml` in your `spring.cloud.config.server.git.uri` and commit/push the change.
 1. Now perform the _/actuator/refresh_ endpoint
 ```bash
 $ curl -X POST http://localhost:8080/actuator/refresh
 ```
-Note in the output above that **spring.datasource.password** got refreshed. Also in the application logs you can notice the following
+
+**Note:** in the output above that **spring.datasource.password** got refreshed. Also in the application logs you can notice that the DB connection pool got shutdown and started back. 
 ```
 2018-04-18 21:27:29.660  INFO 15521 --- [nio-8080-exec-3] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
 2018-04-18 21:27:29.669  INFO 15521 --- [nio-8080-exec-3] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
 ```
+
 1. Now try to call the _DELETE_ or _GET_ and you can see the output. 
 
