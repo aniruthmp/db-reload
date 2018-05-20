@@ -4,11 +4,9 @@ import io.pivotal.dbreload.domain.User;
 import io.pivotal.dbreload.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RefreshScope
 @RequestMapping(path = "/demo")
 @Slf4j
 public class UserController {
@@ -20,7 +18,7 @@ public class UserController {
     public @ResponseBody User addNewUser(@RequestParam String name, @RequestParam String email) {
         log.info("Came inside addNewUser");
         User user = new User();
-        user.setName(name);
+        user.setFirstName(name);
         user.setEmail(email);
         userRepository.save(user);
         log.info("Saved : " + user.toString());
@@ -37,7 +35,7 @@ public class UserController {
     public @ResponseBody String removeUser(@RequestParam Integer id) {
         log.info("Came inside removeUser");
         try {
-            userRepository.deleteById(id);
+            userRepository.delete(id);
             return "Success";
         } catch (Exception ex) {
             ex.printStackTrace();
