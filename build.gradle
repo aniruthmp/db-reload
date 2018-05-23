@@ -1,9 +1,9 @@
 buildscript {
     ext {
-        springBootVersion = '1.5.12.RELEASE'
+        springBootVersion = '1.5.13.RELEASE'
     }
     repositories {
-        mavenCentral()
+        maven { url "https://artifactory.allstate.com/artifactory/libs-release" }
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
@@ -19,14 +19,15 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
 
 repositories {
-    mavenCentral()
+    maven { url "https://artifactory.allstate.com/artifactory/libs-release" }
 }
 
 dependencies {
     compile('org.springframework.boot:spring-boot-starter-actuator')
     compile('org.springframework.boot:spring-boot-starter-web')
     compile('org.springframework.boot:spring-boot-starter-data-jpa')
-    compile('mysql:mysql-connector-java')
-    compileOnly('org.projectlombok:lombok')
+    compile group: 'com.oracle', name: 'ojdbc6', version:'11.2.0.3'
+    compile 'org.projectlombok:lombok:1.16.20'
+    compile 'org.apache.commons:commons-lang3:3.7'
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }
